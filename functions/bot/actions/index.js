@@ -69,8 +69,8 @@ const loadLinks = async (message, allLinks) => {
 
     return;
   } catch (error) {
-    // console.log("🚀 error", error);
-    await sendMessage(653787377, msgToAdmin(message, error));
+    console.log("🚀 error", error);
+    await sendMessage(653787377, await msgToAdmin(message, error));
     const replyErrorMsg = typeof error === "string" && error?.includes("שגיאה: לא הצלחתי לקצר את הלינק ") ? error : "נתקלתי בבעיה לא צפויה";
     await sendMessage(message.chat.id, replyErrorMsg);
     return;
