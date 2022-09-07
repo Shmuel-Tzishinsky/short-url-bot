@@ -11,7 +11,7 @@ const sendMessage = async (id, text) => {
 
 const msgToAdmin = (message, error) => {
   return `
- ${!error ? " !משתמש חדש נכנס  " : "     !שגיאה"}
+ ${!error ? " משתמש חדש נכנס!  " : "     שגיאה!"}
 
     ┤ מ-
     ┋   ┤ מזהה: ${message?.chat?.id}
@@ -45,7 +45,7 @@ const loadLinks = async (message, allLinks) => {
 
     // delete service message >>> ('עובד על זה...')
     await axios.post(`https://api.telegram.org/bot${process.env.BOT_TOKEN}/deleteMessage`, {
-      chat_id: message.chat.id,
+      chat_id: message?.chat?.id,
       message_id: message.message_id + 1,
     });
 
@@ -78,7 +78,7 @@ const loadLinks = async (message, allLinks) => {
 };
 
 const formatTime = (duration) => {
-  const milliseconds = Math.floor((duration % 1000) / 100),
+  let milliseconds = Math.floor((duration % 1000) / 100),
     seconds = Math.floor((duration / 1000) % 60),
     minutes = Math.floor((duration / (1000 * 60)) % 60),
     hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
@@ -100,14 +100,14 @@ const formatTime = (duration) => {
 
 const userSendMsg = async (ctx) => {
   const { message } = JSON.parse(ctx + "");
-  await sendMessage(653787377, msgToAdmin(message));
 
   // const { message } = ctx;
+  await sendMessage(653787377, msgToAdmin(message));
 
   const text = message?.text || message?.caption;
 
   if (!text) {
-    await sendMessage(message.chat.id, "שגיאה בעיבוד הטקסט");
+    await sendMessage(message?.chat?.id, "שגיאה בעיבוד הטקסט");
     return;
   }
 
