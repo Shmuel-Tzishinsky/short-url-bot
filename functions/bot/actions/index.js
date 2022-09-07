@@ -44,10 +44,11 @@ const loadLinks = async (message, allLinks) => {
     }
 
     // delete service message >>> ('עובד על זה...')
-    await axios.post(`https://api.telegram.org/bot${process.env.BOT_TOKEN}/deleteMessage`, {
-      chat_id: message?.chat?.id,
-      message_id: message.message_id + 1,
-    });
+    if (message?.chat?.id)
+      await axios.post(`https://api.telegram.org/bot${process.env.BOT_TOKEN}/deleteMessage`, {
+        chat_id: message.chat.id,
+        message_id: message.message_id + 1,
+      });
 
     if (allLinks?.length > 1) {
       await sendMessage(message.chat.id, `הלינקים שקיבלתי  (${matches?.length})👇`);
