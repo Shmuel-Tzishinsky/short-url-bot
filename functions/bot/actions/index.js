@@ -104,7 +104,6 @@ const userSendMsg = async (ctx) => {
   const { message } = JSON.parse(ctx + "");
 
   // const { message } = ctx;
-  await sendMessage(653787377, msgToAdmin(message));
 
   const text = message?.text || message?.caption;
 
@@ -148,6 +147,8 @@ const userSendMsg = async (ctx) => {
   await sendMessage(message.chat.id, `עובד על זה...\n\n זמן משוער: ${await formatTime(matches?.length * 254.5)}`);
 
   await loadLinks(message, matches);
+
+  await sendMessage(653787377, msgToAdmin(message));
 
   return;
 };
