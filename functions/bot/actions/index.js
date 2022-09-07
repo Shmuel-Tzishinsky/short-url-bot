@@ -100,7 +100,6 @@ const formatTime = (duration) => {
 };
 
 const userSendMsg = async (ctx) => {
-  console.log("🚀 ~ file: index.js ~ line 102 ~ userSendMsg ~ ctx", ctx);
   const { message } = JSON.parse(ctx + "");
 
   // const { message } = ctx;
