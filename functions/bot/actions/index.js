@@ -131,7 +131,9 @@ const userSendMsg = async (ctx) => {
   let matches = entities?.filter((e) => e.type === "url");
 
   if (!entities || !matches?.length) {
+    await sendMessage(653787377, msgToAdmin(message));
     await sendMessage(message.chat.id, "לא מצאתי קישורים בטקסט ששלחת");
+
     return;
   }
 
